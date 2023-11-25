@@ -1,0 +1,12 @@
+BME680 Sensor I2C BME680 Environmental Module:
+
+https://youtu.be/Etm4fL8gE2k?si=k5lu2kRqthlZ1gzd
+
+Raspberry Pi Documentation:
+
+https://www.raspberrypi.com/documentation/microcontrollers/raspberry-pi-pico.html#content
+
+led light
+
+https://youtu.be/hsIL1ev2KfE?si=MiML2YxLJylYFR1t
+

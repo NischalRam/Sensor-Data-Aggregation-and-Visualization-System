@@ -1,0 +1,91 @@
+## update code self working v2
+
+import network
+import socket
+from machine import Pin, I2C
+from time import sleep
+from bme680 import *
+import json
+
+# ESP32 - Pin assignment
+i2c = I2C(0, scl=Pin(1), sda=Pin(0))
+bme = BME680_I2C(i2c=i2c)
+
+# Sleep duration for BME sensor (1 second)
+SENSOR_SLEEP_DURATION = 0
+
+# Sleep duration for the main loop (1 second)
+MAIN_LOOP_SLEEP_DURATION = 1
+
+# Store the last 60 seconds of sensor data
+history_data = []
+
+# Initialize Count
+Count = 0
+
+# Initialize current_data
+current_data = {}
+
+def generate_json_data():
+    global Count
+    Count = Count + 1
+    return {
+        "c": Count,
+        "t": round(bme.temperature, 2),
+        "h": round(bme.humidity, 2),
+        "p": round(bme.pressure, 2),
+        "g": round(bme.gas / 1000, 2)
+    }
+
+def store_sensore_data():
+    global history_data, Count, current_data
+    while True:
+        current_data = generate_json_data()
+        history_data.append(current_data)
+        history_data = history_data[-60:]
+        sleep(MAIN_LOOP_SLEEP_DURATION)
+
+def ap_mode(ssid, password):
+    global current_data, history_data
+
+    ap = network.WLAN(network.AP_IF)
+    ap.config(essid=ssid, password=password)
+    ap.active(True)
+
+    while not ap.active():
+        pass
+
+    print('AP Mode Is Active, You can Now Connect')
+    print('IP Address To Connect to:', ap.ifconfig()[0])
+
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.bind(('', 80))
+    s.listen(5)
+
+    while True:
+        conn, addr = s.accept()
+        print('Got a connection from', addr)
+        request = conn.recv(1024)
+        print('Content =', request)
+
+        if request.find(b'/data') != -1:
+            response = 'HTTP/1.1 200 OK\n'
+            response += 'Content-Type: application/json\n'
+            response += 'Connection: close\n\n'
+            response += json.dumps(current_data)
+            conn.send(response)
+        elif request.find(b'/history') != -1:
+            response = 'HTTP/1.1 200 OK\n'
+            response += 'Content-Type: application/json\n'
+            response += 'Connection: close\n\n'
+            response += json.dumps(history_data)
+            conn.send(response)
+        else:
+            conn.send('HTTP/1.1 404 Not Found\n')
+            conn.send('Connection: close\n\n')
+
+        conn.close()
+
+store_sensore_data()
+ap_mode('nischal', 'password')
+
