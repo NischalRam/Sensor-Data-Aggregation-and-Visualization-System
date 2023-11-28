@@ -1,3 +1,5 @@
+## final code data will be passed as JSON data
+
 from machine import Pin, I2C
 from time import sleep
 from bme680 import *

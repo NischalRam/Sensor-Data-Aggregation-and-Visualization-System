@@ -1,0 +1,58 @@
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px;
+    background-color: #c1d300; /* Violet background color */
+}
+
+header, section, footer {
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #ff8800; /* Green color for header, project-description, and team-members sections */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.822);
+}
+
+h1, h2 {
+    color: #ffd500; /* Yellow heading color */
+    text-decoration: underline; /* Add underline to headings */
+}
+
+#project-description, #team-members {
+    background-color: #ff8800; /* Green color for sections */
+}
+
+ul {
+    list-style-type: none;
+}
+
+li {
+    padding: 5px 0;
+}
+
+button {
+    display: block;
+    width: 200px;
+    padding: 15px;
+    margin: 20px auto;
+    background-color: #00baaa;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;
+    outline: none;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+}
+
+button:hover {
+    background-color: #005f73;
+    box-shadow: 0 6px 8px rgba(0,0,0,0.3);
+    transform: translateY(-2px);
+}
+
