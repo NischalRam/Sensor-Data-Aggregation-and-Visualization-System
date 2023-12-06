@@ -1,6 +1,12 @@
 function updateData() {
-    const firstUrl = 'http://192.168.9.211/';
-    const backupUrl = 'http://192.168.9.204/';
+    const firstUrl = 'http://192.168.117.204/';
+    const backupUrl = 'http://192.168.117.211/';
+
+    // Check the state of Max Values toggle switch
+    const showMaxValues = document.getElementById('maxValuesToggle').checked;
+
+    // Check the state of Mean Values toggle switch
+    const showMeanValues = document.getElementById('meanValuesToggle').checked;
 
     // Function to fetch data from a given URL
     const fetchData = (url) => {
@@ -19,7 +25,6 @@ function updateData() {
             .then(response => response.ok)
             .catch(() => false);
     };
-
 
     // Update Pico W 1 status
     pingDevice(firstUrl)
@@ -47,7 +52,6 @@ function updateData() {
             }
         });
 
-
     // Try fetching data from the first URL
     fetchData(firstUrl)
         .then(data => {
@@ -58,16 +62,32 @@ function updateData() {
             document.getElementById('gas').innerText = data.gas || 0;
 
             // Max Values
-            document.getElementById('max_temperature').innerText = data.max_values.max_temperature || 0;
-            document.getElementById('max_humidity').innerText = data.max_values.max_humidity || 0;
-            document.getElementById('max_pressure').innerText = data.max_values.max_pressure || 0;
-            document.getElementById('max_gas').innerText = data.max_values.max_gas || 0;
+            if (showMaxValues) {
+                document.getElementById('max_temperature').innerText = data.max_values.max_temperature || 0;
+                document.getElementById('max_humidity').innerText = data.max_values.max_humidity || 0;
+                document.getElementById('max_pressure').innerText = data.max_values.max_pressure || 0;
+                document.getElementById('max_gas').innerText = data.max_values.max_gas || 0;
+            } else {
+                // Set default values to 0 or any desired default value without making a fetch request
+                document.getElementById('max_temperature').innerText = 0;
+                document.getElementById('max_humidity').innerText = 0;
+                document.getElementById('max_pressure').innerText = 0;
+                document.getElementById('max_gas').innerText = 0;
+            }
 
             // Mean Values
-            document.getElementById('mean_temperature').innerText = data.mean_values.mean_temperature || 0;
-            document.getElementById('mean_humidity').innerText = data.mean_values.mean_humidity || 0;
-            document.getElementById('mean_pressure').innerText = data.mean_values.mean_pressure || 0;
-            document.getElementById('mean_gas').innerText = data.mean_values.mean_gas || 0;
+            if (showMeanValues) {
+                document.getElementById('mean_temperature').innerText = data.mean_values.mean_temperature || 0;
+                document.getElementById('mean_humidity').innerText = data.mean_values.mean_humidity || 0;
+                document.getElementById('mean_pressure').innerText = data.mean_values.mean_pressure || 0;
+                document.getElementById('mean_gas').innerText = data.mean_values.mean_gas || 0;
+            } else {
+                // Set default values to 0 or any desired default value without making a fetch request
+                document.getElementById('mean_temperature').innerText = 0;
+                document.getElementById('mean_humidity').innerText = 0;
+                document.getElementById('mean_pressure').innerText = 0;
+                document.getElementById('mean_gas').innerText = 0;
+            }
         })
         .catch(error => {
             console.error(`Error fetching data from ${firstUrl}:`, error);
@@ -82,16 +102,32 @@ function updateData() {
                     document.getElementById('gas').innerText = data.gas || 0;
 
                     // Max Values
-                    document.getElementById('max_temperature').innerText = data.max_values.max_temperature || 0;
-                    document.getElementById('max_humidity').innerText = data.max_values.max_humidity || 0;
-                    document.getElementById('max_pressure').innerText = data.max_values.max_pressure || 0;
-                    document.getElementById('max_gas').innerText = data.max_values.max_gas || 0;
+                    if (showMaxValues) {
+                        document.getElementById('max_temperature').innerText = data.max_values.max_temperature || 0;
+                        document.getElementById('max_humidity').innerText = data.max_values.max_humidity || 0;
+                        document.getElementById('max_pressure').innerText = data.max_values.max_pressure || 0;
+                        document.getElementById('max_gas').innerText = data.max_values.max_gas || 0;
+                    } else {
+                        // Set default values to 0 or any desired default value without making a fetch request
+                        document.getElementById('max_temperature').innerText = 0;
+                        document.getElementById('max_humidity').innerText = 0;
+                        document.getElementById('max_pressure').innerText = 0;
+                        document.getElementById('max_gas').innerText = 0;
+                    }
 
                     // Mean Values
-                    document.getElementById('mean_temperature').innerText = data.mean_values.mean_temperature || 0;
-                    document.getElementById('mean_humidity').innerText = data.mean_values.mean_humidity || 0;
-                    document.getElementById('mean_pressure').innerText = data.mean_values.mean_pressure || 0;
-                    document.getElementById('mean_gas').innerText = data.mean_values.mean_gas || 0;
+                    if (showMeanValues) {
+                        document.getElementById('mean_temperature').innerText = data.mean_values.mean_temperature || 0;
+                        document.getElementById('mean_humidity').innerText = data.mean_values.mean_humidity || 0;
+                        document.getElementById('mean_pressure').innerText = data.mean_values.mean_pressure || 0;
+                        document.getElementById('mean_gas').innerText = data.mean_values.mean_gas || 0;
+                    } else {
+                        // Set default values to 0 or any desired default value without making a fetch request
+                        document.getElementById('mean_temperature').innerText = 0;
+                        document.getElementById('mean_humidity').innerText = 0;
+                        document.getElementById('mean_pressure').innerText = 0;
+                        document.getElementById('mean_gas').innerText = 0;
+                    }
                 })
                 .catch(backupError => {
                     // Handle the error gracefully for the backup URL
