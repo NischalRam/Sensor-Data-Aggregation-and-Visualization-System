@@ -1,6 +1,7 @@
 function updateData() {
-    const firstUrl = 'http://192.168.117.204/';
-    const backupUrl = 'http://192.168.117.211/';
+    // const firstUrl = 'http://192.168.98.204/';
+    const firstUrl = 'http://192.168.98.207:8080/';
+    const backupUrl = 'http://192.168.98.211/';
 
     // Check the state of Max Values toggle switch
     const showMaxValues = document.getElementById('maxValuesToggle').checked;

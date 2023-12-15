@@ -21,6 +21,19 @@ bme = BME680_I2C(i2c=i2c)
 
 history_stack = []
 
+def encryption(data):
+    chars = [' ', '!', '"', '#', '$', '%', '&', "'", '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<', '=', '>', '?', '@', '[', '\\', ']', '^', '_', '`', '{', '|', '}', '~', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+    key= ['Q', 'W', 'z', 'C', '7', 't', '*', 'x', '<', 'T', '/', 'k', '>', 'V', 'p', 'N', 's', '#', ')', 'Z', '?', '1', 'A', ' ', '$', 'S', '^', '!', '+', '2', '3', 'M', "'", '-', 'o', 'i', 'u', 'b', 'y', 'q', 'G', 'O', 'r', '4', 'e', 'd', 'D', '[', ';', 'Y', 'I', '&', 'B', 'w', 'g', 'K', 'j', '"', 'h', '8', '{', '(', '@', '|', 'X', '~', '9', 'E', ':', 'f', 'a', ',', 'm', 'J', ']', 'l', 'U', '_', 'R', '6', 'c', '.', '}', 'H', 'F', 'P', '\\', '0', 'L', '5', 'v', '%', '=', '`', 'n']
+
+    # Create a dictionary for character mapping
+    char_mapping = dict(zip(chars, key))
+
+    # Use the dictionary to substitute characters in the data
+    encrypted_data = ''.join(char_mapping.get(char, char) for char in data)
+
+    return encrypted_data
+
+
 def api_response(temp, hum, pres, gas, max_temp, max_hum, max_pres, max_gas, mean_temp, mean_hum, mean_pres, mean_gas):
     data = {
         "temperature": temp,

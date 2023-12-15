@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Homepage</title>
+    <!-- <link rel="stylesheet" href="index.css"> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+
+</head>
+<body>
+    <header>
+        <h1>Welcome to Our Project Sensor Data Aggregation and Visualization System</h1>
+    </header>
+
+    <section id="project-description">
+        <h2>Project Overview</h2>
+        <p> The goal of this project is to develop an extensive software system that collects data from a network of sensors, 
+            combines the information gathered, and delivers it to end users via a user-friendly graphical user interface (GUI)
+             hosted on a server.</p>
+    </section>
+
+    <section id="team-members">
+        <h2>Team members</h2>
+        <ul>
+            <li>Nischal Ram () - Role</li>
+            <li>Niharika Prathi (Z1981037) - Role</li>
+            <li>Hemanth Chimakurthi() - Role</li>
+        </ul>
+    </section>
+
+    <footer>
+        <button id="view-sensor-data">Sensor Data</button>
+    </footer>
+
+    <script>
+        document.getElementById('view-sensor-data').addEventListener('click', function() {
+            window.location.href = '{{ url_for("sensor_data") }}';
+        });
+    </script>
+    
+</body>
+</html>

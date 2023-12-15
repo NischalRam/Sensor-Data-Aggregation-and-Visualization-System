@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="styles.css">
+        <script src="script.js"></script>
+        <title>ESP32 Sensor Data</title>
+    </head>
+    <body>
+        <div class="container">
+            <h1><b>Sensor Data</b></h1>
+            <div class="grid">
+                <p>Temperature: <span id="temperature"></span></p>
+                <p>Humidity: <span id="humidity"></span></p>
+                <p>Pressure: <span id="pressure"></span></p>
+                <p>Gas: <span id="gas"></span></p>
+            </div>
+            <h2><b>Max Values</b></h2>
+            <div class="grid">
+                <p>Max Temperature: <span id="max_temperature"></span></p>
+                <p>Max Humidity: <span id="max_humidity"></span></p>
+                <p>Max Pressure: <span id="max_pressure"></span></p>
+                <p>Max Gas: <span id="max_gas"></span></p>
+            </div>
+            <h2><b>Mean Values</b></h2>
+            <div class="grid">
+                <p>Mean Temperature: <span id="mean_temperature"></span></p>
+                <p>Mean Humidity: <span id="mean_humidity"></span></p>
+                <p>Mean Pressure: <span id="mean_pressure"></span></p>
+                <p>Mean Gas: <span id="mean_gas"></span></p>
+            </div>
+            <button onclick="updateData()">Update Data</button>
+        </div>
+    </body>
+</html>
